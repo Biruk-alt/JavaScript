@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bankist</title>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<body>
+    <nav>
+        <h1 class="welcome">Log in to get started</h1>
+        <div class="image">
+            <img src="./images/logo (1).png">
+        </div>
+        <form class="login">
+            <div class="space">
+                <input class="login__input login__input--user" type="text" placeholder="user"></input>
+                <input class="login__input login__input--pin" type="text" placeholder="PIN" maxlength="4"></input>
+                <button class="btn">→</button>
+            </div>
+        </form>
+    </nav>
+
+    <!-- main -->
+    <main>
+        <div class="balance">
+            <div class="date-box">
+                <p>Current balance</p>
+                <p class="date">13/08/2026</p>
+            </div>
+            <div class="current-money">25 952,45 £</div>
+        </div>
+
+    <!-- movements -->
+     <div class="movements">
+        <div class="movements__row">
+            <div class="movements__type movements__type--deposit">1 DEPOSIT</div>
+            <div class="movements__date">3 days ago</div>
+            <div class="movements__value">500 £</div>
+        </div>
+
+       <div class="movements__row">
+            <div class="movements__type movements__type--withdraw">1 WITHDRAW</div>
+            <div class="movements__date">13/08/2026</div>
+            <div class="movements__value">400 £</div>
+        </div>
+    </div>
+
+    <!-- side -->
+    <div class="operation transfer">
+        <h1>Transfer money</h1>
+        <div class="operation-box">
+            <input type="text" class="name"></input>
+            <input type="number" class="transfer-amt"></input>
+            <button class="enter-btn">→</button>
+            <label for="name">Transfer to</label>
+            <label for="transfer-amt">Amount</label>
+        </div>
+    </div>
+
+    <div class="operation loan">
+        <h1>Request Loan</h1>
+        <div class="operation-box">
+            <input type="number" class="loan-amt"></input>
+            <button class="enter-btn loan-btn">→</button>
+            <label for="transfer-amt">Amount</label>
+        </div>
+    </div>
+
+    <div class="operation close">
+        <h1>Close account</h1>
+        <div class="operation-box">
+            <input type="text" class="close-name"></input>
+            <input type="number" class="close-pin"></input>
+            <button class="enter-btn close-btn">→</button>
+            <label for="name">Confirm user</label>
+            <label for="transfer-amt">Confirm PIN</label>
+        </div>
+    </div>
+
+    <footer>
+        <div class="under in">
+            <p>IN</p>
+            <h1  class="inhead">27 000 £</h1>
+        </div>
+        <div class="under out">
+            <p>OUT</p>
+            <h1 class="outhead">23 000 £</h1>
+        </div>
+        <div class="under int">
+            <p>INTEREST</p>
+            <h1 class="inthead">324,54 £</h1>
+        </div>
+        <button class="sort-btn">Sort</button>
+
+    </footer>
+
+    <!-- logout timer -->
+     <p class="logout">You will be logged out in 9:59</p>
+    </main>
+
+
+<script src="script.js"></script>
+</body>
+</html>

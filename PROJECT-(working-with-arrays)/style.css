@@ -1,0 +1,246 @@
+
+
+*{
+    font-family: poppins;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+:root {
+    --light-color: #f3f3f3;
+    --dark-color: #444;
+}
+
+body {
+    background-color: #f3f3f3;
+    color: var(--dark-color);
+    font-family: poppins,sans-serif;
+    font-weight: normal;
+}
+/* 
+// Nav Bar */
+img {
+    width: 52px;
+    height: 52px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    padding-right: 60px;
+    align-items: center;
+  
+}
+
+input {
+    width: 120px;
+    height: 34px;
+    border-radius: 160px;
+    background-color: white;
+    text-align: center;
+    border: none;
+    transition: ease;
+}
+
+input:focus {
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.space {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    border: none;
+    font-size: 22px;
+    margin-bottom: 17px;
+}
+
+
+
+/* Main */
+.balance p {
+    font-size: 22px;
+}
+.balance .date {
+    font-size: 14px;
+    color: #888888;
+}
+.current-money {
+    font-size: 45px;;
+}
+.balance {
+    display: flex;
+    justify-content: space-between;
+    grid-column: span 2;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: auto repeat(3, 150px) auto;
+    gap: 20px;
+    max-width: 120rem;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 20px;
+    opacity: 0;
+    transition: 1s ease;
+}
+
+.movements {
+    grid-column: 4fr;
+    grid-row: span 3;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    overflow: scroll;
+}
+
+.movements__row {
+    border-bottom: 1px solid #eee;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 12.5px 20px;
+    gap: 20px;
+}
+
+.movements__value {
+    font-size: 17px;
+    justify-self: end;
+    
+}
+.movements__date {
+    font-size: 11px;
+}
+
+
+.movements__type--deposit {
+    padding: 1px 10px;
+    background-image: linear-gradient(to top left, #39b385, #9be15d);
+    font-size: 11px;
+    border-radius: 100px;
+    color: white;
+}
+
+.movements__type--withdraw {
+    background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+    font-size: 11px;
+    border-radius: 100px;
+    color: white;
+    padding: 1px 10px;
+}
+
+.operation {
+    background-image:  linear-gradient(to top left, #ffb003, #ffcb03);
+    border-radius: 10px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.operation h1 {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.operation input {
+    width: 98px;
+    height: 28px;
+    border-radius: 10px;
+    background-image: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: 0.2s ease;
+}
+
+.operation input:focus {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.6)
+}
+
+.operation label {
+    font-size: 13px;
+    text-align: center;
+}
+
+.enter-btn {
+    width: 39px;
+    height: 28px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 10px;
+}
+
+.operation-box {
+    display: grid;
+    grid-template-columns: repeat(2, 98px) auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
+}
+
+
+.loan {
+    background-image: linear-gradient(to top left, #39b385, #9be15d);
+}
+
+.loan .operation-box {
+    display: grid;
+    grid-template-columns: repeat(2, 98px);
+    grid-template-rows: auto auto;
+    gap: 10px;
+}
+
+.close {
+    background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+}
+
+.logout {
+    font-size: 12.5px;
+}
+
+footer {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+footer h1 {
+    font-size: 22px;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+.under {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.sort-btn {
+    border: none;
+}
+
+footer .in h1,
+footer .int h1  {
+    color: #66c873;
+}
+
+footer .out h1 {
+    color: #f5465d;
+}
+
+.logout {
+    transform: translateX(50%);
+}
