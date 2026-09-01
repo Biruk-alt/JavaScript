@@ -1,0 +1,510 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 500;
+}
+
+body {
+    font-family: Poppins;
+    background-color: var(--light-color);
+    line-height: 1.9;
+    font-weight: 500;
+}
+
+:root {
+    --dark-color: #444444;
+    --green-color: #5ec576;
+    --light-color: #f3f3f3;
+    --color-primary-opacity: #5ec5763a;
+    --lightgrey-color: #666;
+    --color-secondary-opacity: #ffcd0331; 
+    --color-primary: #5ec576;
+    --color-secondary: #ffcb03;
+    --color-tertiary: #ff585f;
+}
+
+
+ /* navigation bar */
+ nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    min-height: 90px;
+    position: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 90;
+ }
+
+ .lists a {
+    font-size: 17px;
+    text-decoration: none;
+    color: var(--dark-color);
+    font-family: Poppins;
+ }
+
+ .lists {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+ }
+
+ .lists .open-acc {
+    padding: 8px 25px;
+    border-radius: 30px;
+    background-color: var(--green-color);
+ }
+
+  .lists .open-acc:hover {
+   background-color: #397e49;
+} 
+
+
+ /* home page */
+ .home-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 100vh;
+    border-bottom: 1px solid var(--dark-color);
+    gap: 50px;
+    padding: 0 70px;
+ }
+
+ .home-page img {
+    object-fit: cover;
+    width: 385px;
+ }
+
+ .home-page__right {
+   flex: 0.8; 
+   text-align: left;
+ }
+
+ .home-page__left {
+   flex: 1.2; 
+   text-align: left;
+   gap: 30px;
+   display: flex;
+   flex-direction: column;
+ }
+
+ .home-page__left h1 {
+    font-size: 55px;
+    text-align: left;
+    line-height: 1.3;  
+ }
+ .home-page__left p {
+    font-size: 24px;
+ }
+
+ .home-page a {
+    font-size: 17px;
+    color: var(--green-color);
+ }
+
+ .home-page span {
+    position: relative;
+ }
+
+ .home-page span::after {
+    content: "";
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--green-color);
+    position: absolute;
+    z-index: -1;
+    transform: scale(1.07, 1.05) skewX(-15deg);
+ }
+
+
+
+ /* features page */
+.features-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-left: 140px;
+    padding-right: 80px;
+    margin-top: 150px;
+    padding-bottom: 150px;
+    border-bottom: 1px solid var(--dark-color);
+    margin-bottom: 150px;
+}
+
+ .features-page__features-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 303px);
+    gap: 20px;
+    width: 100%;
+ }
+
+ .circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: var(--color-primary-opacity);
+ }
+
+ .box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: left;
+    justify-content: center;
+ }
+
+ .features-page h2 {
+    font-size: 18px;
+    color: var(--green-color);
+    align-self:first baseline
+ }
+
+ .features-page h3 {
+    font-size: 40px;
+    width: 800px;
+    line-height: 1.5;
+    align-self:first baseline
+ }
+
+ .features-page__features-box__digital-bank {
+    grid-column: 2;
+ }
+
+ .features-page__features-box__included {
+    grid-row: 3;
+    grid-column: 2;
+ }
+
+ .box h4 {
+    font-size: 20px;
+ }
+
+ .box p {
+    font-size: 15px;
+    max-width: 380px;
+    color: var(--lightgrey-color)
+ }
+
+
+
+ /* operations page */
+.operations-page {
+    padding-left: 140px;
+    padding-right: 140px;
+    padding-bottom: 150px;
+    border-bottom: 1px solid var(--dark-color);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-height: 100vh;
+    background-color: var(--light-color);
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+ .operations-page h2 {
+    font-size: 18px;
+    color: var(--green-color);
+    align-self:first baseline
+ }
+
+ .operations-page h3 {
+    font-size: 40px;
+    width: 800px;
+    line-height: 1.5;
+    align-self:first baseline
+ }
+
+ .container__boxinside {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 1000px;
+    gap: 28px;
+    background-color: white;
+    padding: 70px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    margin-top: -20px;
+    position: relative;
+ }
+
+ .circle2 {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: var(--color-secondary-opacity);
+    flex-shrink: 0;
+ }
+
+ .conainer__boxinside__smallerbox {
+    width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+ }
+
+ .boxlists {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(50%);
+    z-index: 2;
+ }
+
+ .container {
+    margin-top: 20px;
+ }
+
+ .conainer__boxinside__smallerbox h5 {
+    font-size: 22.5px;
+
+ }
+
+ .conainer__boxinside__smallerbox p {
+    font-size: 15px;
+    color: var(--lightgrey-color);
+ }
+
+ .container__btn {
+    padding: 13px 45px; 
+    font-size: 16px;
+    border-radius: 100px;
+ }
+
+ .boxlists .transfer {
+    background-color: var(--color-primary);
+ }
+
+ .boxlists .loan {
+    background-color: var(--color-secondary);
+ }
+
+ .boxlists .close {
+    background-color: var(--color-tertiary);
+ }
+
+
+ /* Not sure yet page */
+ .more-info-page {
+    height: 100vh;
+    width: 100%;
+    padding-left: 140px;
+    padding-right: 140px;
+    border-bottom: 1px solid var(--dark-color);
+ }
+
+  .more-info-page h2 {
+    font-size: 18px;
+    color: var(--green-color);
+    align-self:first baseline
+ }
+
+ .more-info-page h3 {
+    font-size: 40px;
+    width: 800px;
+    line-height: 1.5;
+    align-self:first baseline
+ }
+
+.qoute {
+  width: 6rem;
+  height: 6rem;
+  color: #5ec576;
+  fill: "currentColor";
+}
+
+.scroll-box__icon {
+  width: 6rem;
+  height: 6rem;
+  fill: #5ec576; /* Or use color if the SVG uses currentColor */
+}
+
+.scroll-box h3 {
+   font-size: 23px;
+}
+
+.features-page__features-box img {
+   width: 385px;
+   height: 308px;
+}
+
+
+/* login-page */
+
+.login-page {
+  background-color: var(--dark-color);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px 200px;
+  gap: 55px;
+  padding-bottom: 10px;
+}
+
+.login-page h1 {
+   font-size: 40px;
+   color: white;
+   text-align: left;
+   line-height: 1.2;
+   padding: 0 40px;
+}
+
+.login-page .login-btn {
+   padding: 15px 50px;
+   font-size: 18px;
+   border-radius: 100px;
+   background-color: var(--green-color);
+   color: black;
+   border: none;
+   cursor: pointer;
+   margin-bottom: 90px;
+}
+
+.details {
+   display: flex;
+   gap: 30px;
+}
+
+.details a {
+   text-decoration: none;
+   color: grey;
+}
+
+
+
+/* open acc */
+
+.open-account {
+   min-height: 100vh;
+   width: 100%; 
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: fixed;
+   top: 0;
+   left: 0;
+   transition: opacity 0.4s ease;
+   opacity: 1;
+   pointer-events: auto;
+   z-index: 100;
+} 
+
+.hidden {
+   opacity: 0;
+   pointer-events: none;
+}
+
+.bg {
+   min-height: 100vh;
+   width: 100%; 
+   background-color: rgba(0, 0, 0, 0.5);
+   backdrop-filter: blur(4px);
+   position: absolute;
+   width: 100%;
+   height: 100%;
+}
+.open-account__content {
+   display: grid;
+   max-width: 500px;
+   grid-template-columns: 0.5fr 1fr;
+   grid-template-rows: repeat(3, 1fr);
+   gap: 20px;
+}
+
+.content-box {
+   display: flex;
+   flex-direction: column;
+   gap: 40px;
+   background-color: #f3f3f3;
+   padding: 25px 50px;
+   position: relative;
+   max-width: 560px;
+}
+
+.content-box h1 {
+   font-size: 32.5px;
+   line-height: 1.2;
+}
+
+.close-btn {
+   position: absolute;
+   font-size: 120px;
+   color: inherit;
+   top: 0;
+   right: 0;
+   background: none;
+   font: inherit;
+   border: none;
+   margin: 10px;
+}
+
+.content-box .open-account__btn {
+   padding: 15px 50px;
+   font-size: 18px;
+   border-radius: 100px;
+   background-color: var(--green-color);
+   color: black;
+   border: none;
+   cursor: pointer;
+   max-width: 184px;
+   align-self: center;
+}
+
+.content-box input {
+   height: 42px;
+}
+
+h1 {
+  /* Ensuring the heading has enough line-height for the highlight */
+  line-height: 1.5;
+  font-family: sans-serif; /* Replace with your font */
+  color: #444;
+}
+
+.highlight {
+  position: relative;
+  /* Keep display inline so it wraps with text */
+  display: inline;
+  z-index: 1;
+}
+
+.highlight::after {
+  display: block;
+  content: "";
+  position: absolute;
+  /* Cover the span area */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  
+  /* The gradient color and transparency */
+  background-image: linear-gradient(to left top, #39b385, #9be15d);
+  opacity: 0.7;
+  
+  /* Move it behind the text */
+  z-index: -1;
+  
+  /* The skew and scale effect */
+  transform: scale(1.07, 1.05) skewX(-15deg);
+  
+  /* Optional: make it look a bit more like the original matrix */
+  /* transform: matrix(1.07, 0, -0.286706, 1.05, 0, 0); */
+}

@@ -1,768 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xbox Official Site | Home of Gaming</title>
-    <style>
-        :root {
-            --xbox-green: #107C10;
-            --xbox-lime: #9BF00B;
-            --deep-green: #054B16;
-            --pure-white: #FFFFFF;
-            --pure-black: #000000;
-            --gray-light: #F3F3F3;
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="img/icon.png" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Bankist | When Banking meets Minimalist</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <img
+          src="img/logo.png"
+          alt="Bankist logo"
+          class="nav__logo"
+          id="logo"
+        />
+        <ul class="nav__links">
+          <li class="nav__item">
+            <a class="nav__link" href="#section--1">Features</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--2">Operations</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="#section--3">Testimonials</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link nav__link--btn btn--show-modal" href="#"
+              >Open account</a
+            >
+          </li>
+        </ul>
+      </nav>
 
-        body {
-            font-family: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background-color: var(--pure-white);
-            color: var(--pure-black);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- GLOBAL NAVIGATION --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 64px;
-            padding: 0 48px;
-            background-color: var(--pure-white);
-            border-bottom: 1px solid #E6E6E6;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--pure-black);
-            font-weight: 900;
-            font-size: 22px;
-            letter-spacing: -0.5px;
-        }
-
-        .logo svg {
-            width: 32px;
-            height: 32px;
-            fill: var(--xbox-green);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--pure-black);
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.15s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--xbox-green);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .btn-signin {
-            background-color: var(--xbox-green);
-            color: var(--pure-white);
-            border: none;
-            padding: 10px 24px;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 0px;
-            transition: background-color 0.15s ease;
-        }
-
-        .btn-signin:hover {
-            background-color: var(--deep-green);
-        }
-
-        /* --- HERO CAROUSEL SECTION --- */
-        .hero-container {
-            position: relative;
-            width: 100%;
-            height: 620px;
-            background-color: var(--pure-black);
-            overflow: hidden;
-        }
-
-        .hero-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .hero-slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            filter: brightness(0.75);
-        }
-
-        .hero-gradient-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            max-width: 650px;
-            padding: 64px 48px;
-            color: var(--pure-white);
-        }
-
-        .hero-status {
-            display: inline-block;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--xbox-lime);
-            margin-bottom: 12px;
-        }
-
-        .hero-title {
-            font-size: 48px;
-            font-weight: 900;
-            line-height: 1.05;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            margin-bottom: 16px;
-        }
-
-        .hero-desc {
-            font-size: 16px;
-            line-height: 1.5;
-            font-weight: 400;
-            color: #E0E0E0;
-            margin-bottom: 28px;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn-primary {
-            background-color: var(--xbox-green);
-            color: var(--pure-white);
-            border: none;
-            padding: 14px 28px;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 0px;
-            transition: background-color 0.15s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-primary:hover {
-            background-color: #0E6B0E;
-        }
-
-        .btn-secondary {
-            background-color: var(--xbox-lime);
-            color: var(--deep-green);
-            border: none;
-            padding: 14px 28px;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 0px;
-            transition: filter 0.15s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-secondary:hover {
-            filter: brightness(0.9);
-        }
-
-        /* Carousel Navigation Controls */
-        .carousel-arrows {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 24px;
-            z-index: 10;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        .arrow-btn {
-            pointer-events: auto;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--pure-white);
-            color: var(--pure-white);
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0px;
-            transition: background 0.2s, border-color 0.2s;
-        }
-
-        .arrow-btn:hover {
-            background: var(--xbox-green);
-            border-color: var(--xbox-green);
-        }
-
-        /* Carousel Thumbnails Strip */
-        .carousel-thumbs {
-            background-color: #111111;
-            display: flex;
-            padding: 16px 48px;
-            gap: 16px;
-            overflow-x: auto;
-            border-top: 2px solid #222;
-        }
-
-        .thumb-item {
-            flex: 1;
-            min-width: 180px;
-            height: 60px;
-            background-color: #222;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            border-radius: 0px;
-            transition: border-color 0.2s;
-        }
-
-        .thumb-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.6);
-        }
-
-        .thumb-item.active {
-            border-color: var(--xbox-lime);
-        }
-
-        .thumb-item.active img {
-            filter: brightness(1);
-        }
-
-        .thumb-title {
-            position: absolute;
-            bottom: 4px;
-            left: 8px;
-            right: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--pure-white);
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-        }
-
-        /* --- FEATURED SECTION --- */
-        .section-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 48px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 32px;
-        }
-
-        .section-title {
-            font-size: 32px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .promo-card {
-            background-color: var(--gray-light);
-            border-radius: 0px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #E0E0E0;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .promo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-        }
-
-        .promo-img-wrapper {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-        }
-
-        .promo-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .promo-card:hover .promo-img-wrapper img {
-            transform: scale(1.03);
-        }
-
-        .promo-body {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .promo-category {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--xbox-green);
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .promo-card-title {
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1.1;
-            margin-bottom: 12px;
-        }
-
-        .promo-card-desc {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.4;
-            margin-bottom: 20px;
-        }
-
-        .link-arrow {
-            font-size: 13px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--pure-black);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .link-arrow span {
-            color: var(--xbox-green);
-            font-size: 16px;
-        }
-
-        .link-arrow:hover span {
-            transform: translateX(4px);
-            transition: transform 0.15s ease;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: #F2F2F2;
-            border-top: 1px solid #E0E0E0;
-            padding: 48px;
-            color: #666;
-            font-size: 12px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-logo {
-            font-weight: 900;
-            text-transform: uppercase;
-            color: var(--pure-black);
-            font-size: 16px;
-        }
-
-        /* Responsive Breakpoints */
-        @media(max-width: 1024px) {
-            .grid-4 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .hero-title {
-                font-size: 36px;
-            }
-        }
-
-        @media(max-width: 768px) {
-            header {
-                padding: 0 20px;
-            }
-            .nav-links {
-                display: none;
-            }
-            .hero-content {
-                padding: 32px 20px;
-            }
-            .hero-title {
-                font-size: 28px;
-            }
-            .grid-4 {
-                grid-template-columns: 1fr;
-            }
-            .section-container {
-                padding: 40px 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- GLOBAL NAVIGATION -->
-    <header>
-        <div class="nav-left">
-            <a href="#" class="logo">
-                <svg viewBox="0 0 512 512">
-                    <path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm115.4 397.1c-16.1 12.3-33.8 21.8-52.9 28.5l-39.1-66c14.2-12.8 27.6-26.6 40-41.5 25.5-30.8 45.4-66.2 59.8-106.1h73.7c-17.1 68.3-51.9 130.4-91.5 185.1zM140.7 114.9c39.6-54.7 74.4-116.8 91.5-185.1h-73.7c-14.4 39.9-34.3 75.3-59.8 106.1-12.4 14.9-25.8 28.7-40 41.5l39.1 66c19.1-6.7 36.8-16.2 52.9-28.5zM256 313.2c-31.5 0-57.2-25.7-57.2-57.2 0-31.5 25.7-57.2 57.2-57.2 31.5 0 57.2 25.7 57.2 57.2 0 31.5-25.7 57.2-57.2 57.2z"/>
-                </svg>
-                Xbox
-            </a>
-            <ul class="nav-links">
-                <li><a href="#">Game Pass</a></li>
-                <li><a href="#">Games</a></li>
-                <li><a href="#">Devices</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">Support</a></li>
-            </ul>
-        </div>
-        <div class="nav-right">
-            <button class="btn-signin">Sign In</button>
-        </div>
+      <div class="header__title">
+        <h1>
+          When
+          <!-- Green highlight effect -->
+          <span class="highlight">banking</span>
+          meets<br />
+          <span class="highlight">minimalist</span>
+        </h1>
+        <h4>A simpler banking experience for a simpler life.</h4>
+        <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button>
+        <img
+          src="img/hero.png"
+          class="header__img"
+          alt="Minimalist bank items"
+        />
+      </div>
     </header>
 
-    <!-- CINEMATIC ROTATING HERO SECTION -->
-    <section class="hero-container" id="heroCarousel">
-        
-        <!-- Slide 1: EA Sports College Football 27 -->
-        <div class="hero-slide active">
-            <img class="hero-bg" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80" alt="EA Sports College Football 27">
-            <div class="hero-gradient-overlay"></div>
-            <div class="hero-content">
-                <span class="hero-status">New Release • Available Today</span>
-                <h1 class="hero-title">EA Sports College Football 27</h1>
-                <p class="hero-desc">Step onto the gridiron with next-gen gameplay mechanics, immersive stadium atmospheres, and ultimate school pride.</p>
-                <div class="cta-group">
-                    <a href="#" class="btn-primary">Get it now</a>
-                    <a href="#" class="btn-secondary">Join Game Pass</a>
-                </div>
-            </div>
+    <section class="section" id="section--1">
+      <div class="section__title">
+        <h2 class="section__description">Features</h2>
+        <h3 class="section__header">
+          Everything you need in a modern bank and more.
+        </h3>
+      </div>
+
+      <div class="features">
+        <img
+          src="img/digital-lazy.jpg"
+          data-src="img/digital.jpg"
+          alt="Computer"
+          class="features__img lazy-img"
+        />
+        <div class="features__feature">
+          <div class="features__icon">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-monitor"></use>
+            </svg>
+          </div>
+          <h5 class="features__header">100% digital bank</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde alias
+            sint quos? Accusantium a fugiat porro reiciendis saepe quibusdam
+            debitis ducimus.
+          </p>
         </div>
 
-        <!-- Slide 2: Doom The Dark Ages Revelations -->
-        <div class="hero-slide">
-            <img class="hero-bg" src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=1920&q=80" alt="Doom The Dark Ages Revelations">
-            <div class="hero-gradient-overlay"></div>
-            <div class="hero-content">
-                <span class="hero-status">Worldwide Premiere • Play Day One</span>
-                <h1 class="hero-title">Doom The Dark Ages Revelations</h1>
-                <p class="hero-desc">Unleash devastating dark age weaponry against primal demonic hordes in the definitive prequel chapter of the slayer's saga.</p>
-                <div class="cta-group">
-                    <a href="#" class="btn-primary">Pre-order now</a>
-                    <a href="#" class="btn-secondary">Join Game Pass</a>
-                </div>
-            </div>
+        <div class="features__feature">
+          <div class="features__icon">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-trending-up"></use>
+            </svg>
+          </div>
+          <h5 class="features__header">Watch your money grow</h5>
+          <p>
+            Nesciunt quos autem dolorum voluptates cum dolores dicta fuga
+            inventore ab? Nulla incidunt eius numquam sequi iste pariatur
+            quibusdam!
+          </p>
         </div>
+        <img
+          src="img/grow-lazy.jpg"
+          data-src="img/grow.jpg"
+          alt="Plant"
+          class="features__img lazy-img"
+        />
 
-        <!-- Slide 3: Grand Theft Auto VI -->
-        <div class="hero-slide">
-            <img class="hero-bg" src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80" alt="Grand Theft Auto VI">
-            <div class="hero-gradient-overlay"></div>
-            <div class="hero-content">
-                <span class="hero-status">Most Anticipated • Secure Yours</span>
-                <h1 class="hero-title">Grand Theft Auto VI</h1>
-                <p class="hero-desc">Head back to the neon-soaked streets of Vice State in the largest, most immersive open-world evolution ever created.</p>
-                <div class="cta-group">
-                    <a href="#" class="btn-primary">Pre-order now</a>
-                </div>
-            </div>
+        <img
+          src="img/card-lazy.jpg"
+          data-src="img/card.jpg"
+          alt="Credit card"
+          class="features__img lazy-img"
+        />
+        <div class="features__feature">
+          <div class="features__icon">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-credit-card"></use>
+            </svg>
+          </div>
+          <h5 class="features__header">Free debit card included</h5>
+          <p>
+            Quasi, fugit in cumque cupiditate reprehenderit debitis animi enim
+            eveniet consequatur odit quam quos possimus assumenda dicta fuga
+            inventore ab.
+          </p>
         </div>
-
-        <!-- Slide 4: Gears of War E Day -->
-        <div class="hero-slide">
-            <img class="hero-bg" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=80" alt="Gears of War E Day">
-            <div class="hero-gradient-overlay"></div>
-            <div class="hero-content">
-                <span class="hero-status">Xbox Exclusive • Day One with Game Pass</span>
-                <h1 class="hero-title">Gears of War E Day</h1>
-                <p class="hero-desc">Experience the horrific emergence day firsthand through the gritty, brutal origins of Marcus Fenix and Dom Santiago.</p>
-                <div class="cta-group">
-                    <a href="#" class="btn-primary">Get it now</a>
-                    <a href="#" class="btn-secondary">Join Game Pass</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: Call of Duty Modern Warfare 4 -->
-        <div class="hero-slide">
-            <img class="hero-bg" src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1920&q=80" alt="Call of Duty Modern Warfare 4">
-            <div class="hero-gradient-overlay"></div>
-            <div class="hero-content">
-                <span class="hero-status">Global Operations • Available Now</span>
-                <h1 class="hero-title">Call of Duty Modern Warfare 4</h1>
-                <p class="hero-desc">Engage in high-stakes tactical combat across cinematic global campaigns and lightning-fast multiplayer arenas.</p>
-                <div class="cta-group">
-                    <a href="#" class="btn-primary">Get it now</a>
-                    <a href="#" class="btn-secondary">Join Game Pass</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Carousel Interactive Navigation Arrows -->
-        <div class="carousel-arrows">
-            <button class="arrow-btn" id="prevBtn" aria-label="Previous Slide">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <button class="arrow-btn" id="nextBtn" aria-label="Next Slide">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
-        </div>
+      </div>
     </section>
 
-    <!-- Carousel Thumbnails Bar -->
-    <div class="carousel-thumbs" id="thumbContainer">
-        <div class="thumb-item active" data-index="0">
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 1">
-            <div class="thumb-title">CFB 27</div>
-        </div>
-        <div class="thumb-item" data-index="1">
-            <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 2">
-            <div class="thumb-title">Doom: Dark Ages</div>
-        </div>
-        <div class="thumb-item" data-index="2">
-            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 3">
-            <div class="thumb-title">GTA VI</div>
-        </div>
-        <div class="thumb-item" data-index="3">
-            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 4">
-            <div class="thumb-title">Gears: E Day</div>
-        </div>
-        <div class="thumb-item" data-index="4">
-            <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 5">
-            <div class="thumb-title">MW4</div>
-        </div>
-    </div>
+    <section class="section" id="section--2">
+      <div class="section__title">
+        <h2 class="section__description">Operations</h2>
+        <h3 class="section__header">
+          Everything as simple as possible, but no simpler.
+        </h3>
+      </div>
 
-    <!-- FEATURED PROMOTIONAL TILES -->
-    <main class="section-container">
-        <div class="section-header">
-            <h2 class="section-title">Explore Xbox World</h2>
+      <div class="operations">
+        <div class="operations__tab-container">
+          <button
+            class="btn operations__tab operations__tab--1 operations__tab--active"
+            data-tab="1"
+          >
+            <span>01</span>Instant Transfers
+          </button>
+          <button class="btn operations__tab operations__tab--2" data-tab="2">
+            <span>02</span>Instant Loans
+          </button>
+          <button class="btn operations__tab operations__tab--3" data-tab="3">
+            <span>03</span>Instant Closing
+          </button>
+        </div>
+        <div
+          class="operations__content operations__content--1 operations__content--active"
+        >
+          <div class="operations__icon operations__icon--1">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-upload"></use>
+            </svg>
+          </div>
+          <h5 class="operations__header">
+            Tranfser money to anyone, instantly! No fees, no BS.
+          </h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
         </div>
 
-        <div class="grid-4">
-            <!-- Card 1 -->
-            <div class="promo-card">
-                <div class="promo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=600&q=80" alt="Game Pass Ultimate">
-                </div>
-                <div class="promo-body">
-                    <div>
-                        <span class="promo-category">Subscription</span>
-                        <h3 class="promo-card-title">Xbox Game Pass Ultimate</h3>
-                        <p class="promo-card-desc">Play hundreds of high-quality games with friends on console, PC, and cloud.</p>
-                    </div>
-                    <a href="#" class="link-arrow">Join today <span>&rarr;</span></a>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="promo-card">
-                <div class="promo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Xbox Hardware">
-                </div>
-                <div class="promo-body">
-                    <div>
-                        <span class="promo-category">Consoles</span>
-                        <h3 class="promo-card-title">Xbox Series X & S</h3>
-                        <p class="promo-card-desc">Experience lightning-fast load times, unmatched performance, and backward compatibility.</p>
-                    </div>
-                    <a href="#" class="link-arrow">Shop consoles <span>&rarr;</span></a>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="promo-card">
-                <div class="promo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=600&q=80" alt="Accessories">
-                </div>
-                <div class="promo-body">
-                    <div>
-                        <span class="promo-category">Hardware</span>
-                        <h3 class="promo-card-title">Wireless Controllers</h3>
-                        <p class="promo-card-desc">Discover textured grips, custom mapping options, and elite tournament performance.</p>
-                    </div>
-                    <a href="#" class="link-arrow">Explore gear <span>&rarr;</span></a>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="promo-card">
-                <div class="promo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Xbox PC Gaming">
-                </div>
-                <div class="promo-body">
-                    <div>
-                        <span class="promo-category">PC Gaming</span>
-                        <h3 class="promo-card-title">Xbox App for Windows</h3>
-                        <p class="promo-card-desc">Your ultimate hub to discover, download, and play top-tier PC titles in one place.</p>
-                    </div>
-                    <a href="#" class="link-arrow">Download app <span>&rarr;</span></a>
-                </div>
-            </div>
+        <div class="operations__content operations__content--2">
+          <div class="operations__icon operations__icon--2">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-home"></use>
+            </svg>
+          </div>
+          <h5 class="operations__header">
+            Buy a home or make your dreams come true, with instant loans.
+          </h5>
+          <p>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
         </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Microsoft Xbox © 2026</div>
-            <div>All rights reserved. Designed with high-energy gaming aesthetics.</div>
+        <div class="operations__content operations__content--3">
+          <div class="operations__icon operations__icon--3">
+            <svg>
+              <use xlink:href="img/icons.svg#icon-user-x"></use>
+            </svg>
+          </div>
+          <h5 class="operations__header">
+            No longer need your account? No problem! Close it instantly.
+          </h5>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+          </p>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="section--3">
+      <div class="section__title section__title--testimonials">
+        <h2 class="section__description">Not sure yet?</h2>
+        <h3 class="section__header">
+          Millions of Bankists are already making their lifes simpler.
+        </h3>
+      </div>
+
+      <div class="slider">
+        <div class="slide slide--1">
+          <div class="testimonial">
+            <h5 class="testimonial__header">Best financial decision ever!</h5>
+            <blockquote class="testimonial__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Accusantium quas quisquam non? Quas voluptate nulla minima
+              deleniti optio ullam nesciunt, numquam corporis et asperiores
+              laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus
+              id alias reiciendis, perferendis facere pariatur dolore veniam
+              autem esse non voluptatem saepe provident nihil molestiae.
+            </blockquote>
+            <address class="testimonial__author">
+              <img src="img/user-1.jpg" alt="" class="testimonial__photo" />
+              <h6 class="testimonial__name">Aarav Lynn</h6>
+              <p class="testimonial__location">San Francisco, USA</p>
+            </address>
+          </div>
+        </div>
+
+        <!-- <div class="slide slide--2">
+          <div class="testimonial">
+            <h5 class="testimonial__header">
+              The last step to becoming a complete minimalist
+            </h5>
+            <blockquote class="testimonial__text">
+              Quisquam itaque deserunt ullam, quia ea repellendus provident,
+              ducimus neque ipsam modi voluptatibus doloremque, corrupti
+              laborum. Incidunt numquam perferendis veritatis neque repellendus.
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo
+              deserunt exercitationem deleniti.
+            </blockquote>
+            <address class="testimonial__author">
+              <img src="img/user-2.jpg" alt="" class="testimonial__photo" />
+              <h6 class="testimonial__name">Miyah Miles</h6>
+              <p class="testimonial__location">London, UK</p>
+            </address>
+          </div>
+        </div>
+
+        <div class="slide slide--3">
+          <div class="testimonial">
+            <h5 class="testimonial__header">
+              Finally free from old-school banks
+            </h5>
+            <blockquote class="testimonial__text">
+              Debitis, nihil sit minus suscipit magni aperiam vel tenetur
+              incidunt commodi architecto numquam omnis nulla autem,
+              necessitatibus blanditiis modi similique quidem. Odio aliquam
+              culpa dicta beatae quod maiores ipsa minus consequatur error sunt,
+              deleniti saepe aliquid quos inventore sequi. Necessitatibus id
+              alias reiciendis, perferendis facere.
+            </blockquote>
+            <address class="testimonial__author">
+              <img src="img/user-3.jpg" alt="" class="testimonial__photo" />
+              <h6 class="testimonial__name">Francisco Gomes</h6>
+              <p class="testimonial__location">Lisbon, Portugal</p>
+            </address>
+          </div>
+        </div> -->
+
+        <div class="slide"><img src="img/img-1.jpg" alt="Photo 1" /></div>
+        <div class="slide"><img src="img/img-2.jpg" alt="Photo 2" /></div>
+        <div class="slide"><img src="img/img-3.jpg" alt="Photo 3" /></div>
+        <div class="slide"><img src="img/img-4.jpg" alt="Photo 4" /></div>
+        <button class="slider__btn slider__btn--left">&larr;</button>
+        <button class="slider__btn slider__btn--right">&rarr;</button>
+        <div class="dots"></div>
+      </div>
+    </section>
+
+    <section class="section section--sign-up">
+      <div class="section__title">
+        <h3 class="section__header">
+          The best day to join Bankist was one year ago. The second best is
+          today!
+        </h3>
+      </div>
+      <button class="btn btn--show-modal">Open your free account today!</button>
+    </section>
+
+    <footer class="footer">
+      <ul class="footer__nav">
+        <li class="footer__item">
+          <a class="footer__link" href="#">About</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Pricing</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Terms of Use</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Privacy Policy</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Careers</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Blog</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Contact Us</a>
+        </li>
+      </ul>
+      <img src="img/icon.png" alt="Logo" class="footer__logo" />
+      <p class="footer__copyright">
+        &copy; Copyright by
+        <a
+          class="footer__link twitter-link"
+          target="_blank"
+          href="https://twitter.com/jonasschmedtman"
+          >Jonas Schmedtmann</a
+        >. Use for learning or your portfolio. Don't use to teach. Don't claim
+        as your own product.
+      </p>
     </footer>
 
-    <!-- INTERACTIVE CAROUSEL SCRIPT -->
-    <script>
-        const slides = document.querySelectorAll('.hero-slide');
-        const thumbs = document.querySelectorAll('.thumb-item');
-        const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        let currentIndex = 0;
-        let slideInterval;
+    <div class="modal hidden">
+      <button class="btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+        Open your bank account <br />
+        in just <span class="highlight">5 minutes</span>
+      </h2>
+      <form class="modal__form">
+        <label>First Name</label>
+        <input type="text" />
+        <label>Last Name</label>
+        <input type="text" />
+        <label>Email Address</label>
+        <input type="email" />
+        <button class="btn">Next step &rarr;</button>
+      </form>
+    </div>
+    <div class="overlay hidden"></div>
 
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            thumbs.forEach(thumb => thumb.classList.remove('active'));
-
-            currentIndex = (index + slides.length) % slides.length;
-
-            slides[currentIndex].classList.add('active');
-            thumbs[currentIndex].classList.add('active');
-        }
-
-        function nextSlide() {
-            showSlide(currentIndex + 1);
-        }
-
-        function prevSlide() {
-            showSlide(currentIndex - 1);
-        }
-
-        // Event listeners for arrows
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetTimer();
-        });
-
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            resetTimer();
-        });
-
-        // Event listeners for thumbnails
-        thumbs.forEach(thumb => {
-            thumb.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                showSlide(index);
-                resetTimer();
-            });
-        });
-
-        // Auto rotation timer
-        function startTimer() {
-            slideInterval = setInterval(nextSlide, 6000);
-        }
-
-        function resetTimer() {
-            clearInterval(slideInterval);
-            startTimer();
-        }
-
-        startTimer();
-    </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
