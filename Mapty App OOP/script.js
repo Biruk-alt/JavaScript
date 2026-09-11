@@ -6,7 +6,7 @@ const inputDuration = document.querySelector(`.form__input--duration`);
 const inputCadence = document.querySelector(`.form__input--cadence`);
 const inputElevation = document.querySelector(`.form__input--elevation`);
 const inputType = document.querySelector(`.form__input--type`);
-const divWorkouts = document.querySelector(`.workouts`);
+const container = document.querySelector(`.workouts`);
 
 class Workout {
   date = new Date();
@@ -59,12 +59,21 @@ class Cycling extends Workout {
 class App {
   #map;
   #mapEvent;
+  #mapZoomLevel = 13;
   #workouts = [];
 
   constructor() {
+    //find user position
     this._getPosition();
+    
+    // load data from local storage
+    this._getWorkouts();
+
+    //handle evemt listners
     form.addEventListener(`submit`, this._newWorkout.bind(this));
     inputType.addEventListener(`change`, this._toggleElevationField);
+    container.addEventListener(`click`, this._moveToPopup.bind(this));
+
   }
 
   _getPosition() {
@@ -87,7 +96,7 @@ class App {
 
     const coords = [latitude, longitude];
 
-    this.#map = L.map("map").setView(coords, 13);
+    this.#map = L.map("map").setView(coords, this.#mapZoomLevel);
 
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
@@ -95,6 +104,12 @@ class App {
     }).addTo(this.#map);
 
     this.#map.on(`click`, this._showForm.bind(this));
+
+    this.#workouts.forEach(workout => {
+      workout.date = new Date(workout.date)
+      this._renderMarker(workout)
+  })
+
   }
 
   _showForm(mapE) {
@@ -169,26 +184,17 @@ class App {
     this.#workouts.push(workout);
 
     //render marker on map
+    this._renderMarker(workout);
 
-
-    L.marker([lat, lng])
-      .addTo(this.#map)
-      .bindPopup(
-        L.popup({
-          maxWidth: 250,
-          minWidth: 100,
-          autoClose: false,
-          closeOnClick: false,
-          className: `${type}-popup`,
-        }),
-      )
-      .setPopupContent(`${workout.type === `running` ? `🏃‍♂️` : `🚴‍♀️`} ${this._listDescription(workout)}`)
-      .openPopup();
+    
     
     console.log(this._listDescription(workout))
 
     //render workout list
-    this._renderWorkout(workout) 
+    this._renderWorkout(workout);
+
+    //set local storage to all workouts
+    this._setLocalStorage();
     
   }
 
@@ -258,6 +264,63 @@ class App {
     form.insertAdjacentHTML(`afterend`, html);
     this._hideForm();
   }
+
+  _renderMarker(workout) {
+      const [lat, lng] = workout.coords;
+      console.log(lat, lng)
+     L.marker([lat, lng])
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: `${workout.type}-popup`,
+        }),
+      )
+      .setPopupContent(`${workout.type === `running` ? `🏃‍♂️` : `🚴‍♀️`} ${this._listDescription(workout)}`)
+      .openPopup();
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest(`.workout`);
+
+    if(!workoutEl) return;
+
+    const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1
+      },
+    })
+  
+
+  }
+
+_setLocalStorage() {
+  localStorage.setItem(`workouts`, JSON.stringify(this.#workouts))
+}
+
+_getWorkouts() {
+  const data = JSON.parse(localStorage.getItem(`workouts`));
+  console.log(data);
+
+  if(!data) return;
+
+  this.#workouts = data;
+  this.#workouts.forEach(workout => {
+    workout.date = new Date(workout.date)
+    this._renderWorkout(workout)
+  })
+}
+
+reset() {
+  localStorage.removeItem(`workouts`);
+  location.reload();
+}
+
 }
 
 const app = new App();
