@@ -1,68 +1,140 @@
-'use strict';
+"use strict";
 
-///////////////////////////////////////
-// Modal window
+const countriesCont = document.querySelector(`.countries`);
+const btn = document.querySelector(`.btn-country`);
 
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const btnCloseModal = document.querySelector('.btn--close-modal');
-const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const tabs = document.querySelectorAll(`.operations__tab`);
-const tabsBox = document.querySelector(`.operations__tab-container`);
-const currentContent = document.querySelector(`.operations__content`);
-const sections = document.querySelectorAll(`.section`);
+const render = function (data) {
+  const html = `
+        <article class="country">
+          <img class="country__img" src="${data[0].flags.png}" />
+          <div class="country__data">
+            <h3 class="country__name">${data[0].name}</h3>
+            <h4 class="country__region">${data[0].region}</h4>
+            <p class="country__row"><span>👫</span>${(+data[0].population / 1000000).toFixed(1)} people</p>
+            <p class="country__row"><span>🗣️</span>${data[0].languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${data[0].currencies[0].code}</p>
+          </div>
+        </article>
+    `;
 
-const openModal = function () {
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
+  countriesCont.insertAdjacentHTML(`beforeend`, html);
+  countriesCont.style.opacity = 1;
 };
 
-const closeModal = function () {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
+// const renderCountry = function (country) {
+//   const request = new XMLHttpRequest();
+//   request.open(`GET`, `https://countries.dev/name/${country}`);
+//   request.send();
+
+//   request.addEventListener(`load`, function (e) {
+//     const data = JSON.parse(this.responseText);
+//     console.log(data);
+//     render(data);
+
+//     // get neighbor country
+//     const request2 = new XMLHttpRequest();
+//     const neighbor = data[0].borders[0];
+//     request2.open(`GET`, `https://countries.dev/alpha/${neighbor}`);
+//     request2.send();
+
+//     request2.addEventListener(`load`, function (e) {
+//       const data2 = JSON.parse(this.responseText);
+//       console.log(data2);
+
+//   const html = `
+//     <article class="country neighbour">
+//       <img class="country__img" src="${data2.flags.png}" />
+//       <div class="country__data">
+//         <h3 class="country__name">${data2.name}</h3>
+//         <h4 class="country__region">${data2.region}</h4>
+//         <p class="country__row"><span>👫</span>${(+data2.population / 1000000).toFixed(1)} people</p>
+//         <p class="country__row"><span>🗣️</span>${data2.languages[0].name}</p>
+//         <p class="country__row"><span>💰</span>${data2.currencies[0].code}</p>
+//       </div>
+//     </article>
+// `;
+
+//   countriesCont.insertAdjacentHTML(`beforeend`, html);
+//   countriesCont.style.opacity = 1;
+//     });
+//   });
+// };
+
+// renderCountry(`spain`);
+
+//////////////////////////////////////////
+//using modern way
+const renderNeighbor = function (data2) {
+  const html = `
+        <article class="country neighbour">
+          <img class="country__img" src="${data2.flags.png}" />
+          <div class="country__data">
+            <h3 class="country__name">${data2.name}</h3>
+            <h4 class="country__region">${data2.region}</h4>
+            <p class="country__row"><span>👫</span>${(+data2.population / 1000000).toFixed(1)} people</p>
+            <p class="country__row"><span>🗣️</span>${data2.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${data2.currencies[0].code}</p>
+          </div>
+        </article>
+    `;
+
+  countriesCont.insertAdjacentHTML(`beforeend`, html);
+  countriesCont.style.opacity = 1;
 };
 
-for (let i = 0; i < btnsOpenModal.length; i++)
-  btnsOpenModal[i].addEventListener('click', openModal);
+const renderError = function (msg) {
+  countriesCont.insertAdjacentText(`beforeEnd`, msg);
+  // countriesCont.style.opacity = 1;
+};
 
-btnCloseModal.addEventListener('click', closeModal);
-overlay.addEventListener('click', closeModal);
+const getJSON = function (url, errorMsg = `Something Went Wrong`) {
+  return fetch(url).then(function (response) {
+    if (!response.ok) throw new Error(`${errorMsg} ${response.status}`);
+    return response.json();
+  });
+};
 
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    closeModal();
-  }
+const getCountryData = function (country) {
+  getJSON(`https://countries.dev/name/${country}`, `Country not found`)
+    .then(function (data) {
+      render(data);
+
+      //country 2
+      const neighbor = data[0].borders?.[0];
+
+      if (!neighbor) {
+          throw new Error(`No neighbours found`)
+        };
+        
+        return getJSON(`https://countries.dev/alpha/${neighbor}`, `country not found`)
+    })
+    .then(function (data2) {
+        renderNeighbor(data2);
+    })
+    .catch((err) => {
+        renderError(`something went wrong - ${err.message}. Try again!`);
+    })
+    .finally(() => (countriesCont.style.opacity = 1));
+};
+
+btn.addEventListener(`click`, function (e) {
+  getCountryData(`ethiopia`);
 });
 
-tabsBox.addEventListener("click", function(e) {
-  e.preventDefault();
-  const clicked = e.target.closest(".operations__tab")
-  tabs.forEach(function(tab) {
-    tab.classList.remove("operations__tab--active");
-  })
-  clicked.classList.add("operations__tab--active");
-  document.querySelectorAll(`.operations__content`).forEach(function(content) {
-    content.classList.remove("operations__content--active")
-  })
-  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add("operations__content--active")
-})
+getCountryData(`australia`);
 
 
-// revealing on scroll
-sections.forEach(function(sec) {
-  sec.classList.add("section--hidden")
-})
-const reveal = function(entries) {
-  entries.forEach(function(entry) {
 
-    if(entry.isIntersecting) {
-      entry.target.classList.remove("section--hidden");
-      sectionObserver.unobserve(entries[0].target)
-    }
-  })
+
+// CHALLANGE #1
+const whereAmI = function(lat, lng) {
+    fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
 }
 
-const sectionObserver = new IntersectionObserver(reveal,{root: null, threshold: 0.15} )
-sections.forEach(function(section) {
-  sectionObserver.observe(section);
+navigator.geolocation.getCurrentPosition(function(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    whereAmI(latitude, longitude);
 })
+
