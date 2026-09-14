@@ -120,11 +120,10 @@ const getCountryData = function (country) {
     .finally(() => (countriesCont.style.opacity = 1));
 };
 
- btn.addEventListener(`click`, function (e) {
-        if(!data.address.country) console.log(`nahanahaaj`)
+btn.addEventListener(`click`, function (e) {
+  getCountryData(`ethiopia`);
 
-        getCountryData(`ethiopia`);
-      });
+});
 
 // CHALLANGE #1
 
@@ -137,11 +136,10 @@ const whereAmI = function (lat, lng) {
 
       return response.json();
     })
-    .then((data) => {
-      console.log(data.address.country)
-      console.log(`you are in ${data.address.city}, ${data.address.country}`);
-    })
-    .catch((err) => console.log(err));
+    .then((data) => fetch(`https://countries.dev/name/ethiopia`))
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err));
 };
 
 navigator.geolocation.getCurrentPosition(function (position) {
@@ -152,3 +150,5 @@ navigator.geolocation.getCurrentPosition(function (position) {
   //   whereAmI(40.7128, -74.006);
   // whereAmI(0.0, -160.0)
 });
+
+
